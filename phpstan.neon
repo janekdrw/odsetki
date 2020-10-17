@@ -1,0 +1,15 @@
+parameters:
+	level: 6
+	paths:
+		- src
+		- tests
+	fileExtensions:
+		- php
+	excludes_analyse:
+		- %currentWorkingDirectory%/tests/suits/OdsetkiTest.php
+	checkGenericClassInNonGenericObjectType: false
+
+includes:
+	- vendor/phpstan/phpstan-phpunit/extension.neon
+	- vendor/phpstan/phpstan-phpunit/rules.neon
+	- vendor/jangregor/phpstan-prophecy/extension.neon
