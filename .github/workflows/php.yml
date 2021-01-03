@@ -1,12 +1,14 @@
 name: PHP Composer
-
 on: [push]
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      matrix:
+        operating-system: [ ubuntu-latest ]
+        php: [  '7.2' ]
+    name: PHP ${{ matrix.php }} sample
     steps:
       - uses: actions/checkout@v1
 
