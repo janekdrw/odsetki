@@ -27,14 +27,24 @@ class RangeModel
     /**
      * RangeModel constructor.
      *
-     * @param string $from
-     * @param string $to
-     * @param float  $percent
+     * @param Date  $from
+     * @param Date  $to
+     * @param float $percent
      */
-    public function __construct(string $from, ?string $to, float $percent)
+    public function __construct(Date $from, Date $to, float $percent)
     {
-        $this->from    = Date::parse($from);
-        $this->to      = null === $to ? null : Date::parse($to);
+        $this->from    = $from;
+        $this->to      = $to;
         $this->percent = $percent;
+    }
+
+    /**
+     * @param \Mrcnpdlk\Lib\Odsetki\Date $date
+     *
+     * @return bool
+     */
+    public function has(Date $date): bool
+    {
+        return $date->lte($this->to) && $date->gte($this->from);
     }
 }

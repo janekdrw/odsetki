@@ -154,6 +154,26 @@ class Date
     }
 
     /**
+     * @param \Mrcnpdlk\Lib\Odsetki\Date $date
+     *
+     * @return bool
+     */
+    public function gt(Date $date): bool
+    {
+        return $this->getCarbon()->gt($date->getCarbon());
+    }
+
+    /**
+     * @param \Mrcnpdlk\Lib\Odsetki\Date $date
+     *
+     * @return bool
+     */
+    public function gte(Date $date): bool
+    {
+        return $this->getCarbon()->gte($date->getCarbon());
+    }
+
+    /**
      * @return bool
      */
     public function isFreeDay(): bool
@@ -171,5 +191,35 @@ class Date
             || $this->equal(self::getEaster($this->getYear())->addDays(1)) // Poniedziałek Wielkanocny
             || $this->equal(self::getCorpusChristi($this->getYear())) // Poniedziałek Wielkanocny
             ;
+    }
+
+    /**
+     * @param \Mrcnpdlk\Lib\Odsetki\Date $date
+     *
+     * @return bool
+     */
+    public function lt(Date $date): bool
+    {
+        return $this->getCarbon()->lt($date->getCarbon());
+    }
+
+    /**
+     * @param \Mrcnpdlk\Lib\Odsetki\Date $date
+     *
+     * @return bool
+     */
+    public function lte(Date $date): bool
+    {
+        return $this->getCarbon()->lte($date->getCarbon());
+    }
+
+    /**
+     * @param \Mrcnpdlk\Lib\Odsetki\Date $date
+     *
+     * @return int
+     */
+    public function diff(Date $date): int
+    {
+        return $this->getCarbon()->diffInDays($date->getCarbon());
     }
 }
