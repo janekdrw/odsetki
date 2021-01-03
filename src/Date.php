@@ -109,6 +109,16 @@ class Date
     /**
      * @param \Mrcnpdlk\Lib\Odsetki\Date $date
      *
+     * @return int
+     */
+    public function diff(Date $date): int
+    {
+        return $this->getCarbon()->diffInDays($date->getCarbon());
+    }
+
+    /**
+     * @param \Mrcnpdlk\Lib\Odsetki\Date $date
+     *
      * @return bool
      */
     public function equal(Date $date): bool
@@ -178,8 +188,7 @@ class Date
      */
     public function isFreeDay(): bool
     {
-        return true === $this->carbon->isWeekend() // gdy weekend
-            || $this->equal(self::create($this->getYear(), 1, 1)) // Nowy Rok
+        $res = $this->equal(self::create($this->getYear(), 1, 1)) // Nowy Rok
             || $this->equal(self::create($this->getYear(), 1, 6)) // Trzech Króli
             || $this->equal(self::create($this->getYear(), 5, 1))  // Święto Pracy
             || $this->equal(self::create($this->getYear(), 5, 3)) // Święto Konstytucji 3 Maja
@@ -190,7 +199,16 @@ class Date
             || $this->equal(self::create($this->getYear(), 12, 26)) // Drugi dzień Bożego Narodzenia
             || $this->equal(self::getEaster($this->getYear())->addDays(1)) // Poniedziałek Wielkanocny
             || $this->equal(self::getCorpusChristi($this->getYear())) // Poniedziałek Wielkanocny
-            ;
+        ;
+        /*
+         * https://www.dochodzeniewierzytelnosci.pl/2017/01/13/zmiana-sposobu-obliczania-konca-terminu-prawie-cywilnym/
+         * Przed 2017 sobota była brana jako dzień pracujący
+         */
+        if ($this->getYear() >= 2017) {
+            return $res || true === $this->carbon->isWeekend();
+        }
+
+        return $res || true === $this->carbon->isSunday();
     }
 
     /**
@@ -211,15 +229,5 @@ class Date
     public function lte(Date $date): bool
     {
         return $this->getCarbon()->lte($date->getCarbon());
-    }
-
-    /**
-     * @param \Mrcnpdlk\Lib\Odsetki\Date $date
-     *
-     * @return int
-     */
-    public function diff(Date $date): int
-    {
-        return $this->getCarbon()->diffInDays($date->getCarbon());
     }
 }

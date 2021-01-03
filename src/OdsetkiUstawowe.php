@@ -60,6 +60,7 @@ class OdsetkiUstawowe
         if ($this->deadlineDate->isFreeDay()) {
             $this->deadlineDate = $this->deadlineDate->getNextWorkingDay();
         }
+
         $this->paymentDate = Date::parse($paymentDate);
         $this->charge      = $charge;
 
@@ -89,9 +90,6 @@ class OdsetkiUstawowe
         if ($minDate->gt($this->deadlineDate)) {
             throw new Exception(sprintf('Data terminu zapłaty %s jest mniejsza niż zdefiniowany początkowy zakres wartości odsetek %s', $this->deadlineDate->getAsStr(), $minDate->getAsStr()));
         }
-        if ($this->deadlineDate->gt($this->paymentDate)) {
-            throw new Exception(sprintf('Data terminu zapłaty %s musi byc mniejsza niż data uiszczenia zapłaty %s', $this->deadlineDate->getAsStr(), $this->paymentDate->getAsStr()));
-        }
     }
 
     /**
@@ -107,6 +105,9 @@ class OdsetkiUstawowe
         if ($this->deadlineDate === $this->paymentDate) {
             return 0.0;
         }
+        if ($this->deadlineDate->gt($this->paymentDate)) {
+            return 0.0;
+        }
         $calcSum     = 0.0;
         $this->tDesc = [];
         foreach ($this->ranges as $range) {
@@ -117,18 +118,22 @@ class OdsetkiUstawowe
             if ($range->has($this->deadlineDate)) {
                 if ($range->has($this->paymentDate)) {
                     $diffDay = $this->paymentDate->diff($this->deadlineDate);
-                    $desc[]  = sprintf('%s - %s', $this->deadlineDate->getAsStr(), $this->paymentDate->getAsStr());
+                    $desc[]  = $this->deadlineDate->getAsStr();
+                    $desc[]  = $this->paymentDate->getAsStr();
                 } else {
                     $diffDay = $range->to->diff($this->deadlineDate);
-                    $desc[]  = sprintf('%s - %s', $this->deadlineDate->getAsStr(), $range->to->getAsStr());
+                    $desc[]  = $this->deadlineDate->getAsStr();
+                    $desc[]  = $range->to->getAsStr();
                 }
             } else {
                 if ($range->has($this->paymentDate)) {
                     $diffDay = $this->paymentDate->diff($range->from) + 1;
-                    $desc[]  = sprintf('%s - %s', $range->from->getAsStr(), $this->paymentDate->getAsStr());
+                    $desc[]  = $range->from->getAsStr();
+                    $desc[]  = $this->paymentDate->getAsStr();
                 } else {
                     $diffDay = $range->to->diff($range->from) + 1;
-                    $desc[]  = sprintf('%s - %s', $range->from->getAsStr(), $range->to->getAsStr());
+                    $desc[]  = $range->from->getAsStr();
+                    $desc[]  = $range->to->getAsStr();
                 }
             }
 

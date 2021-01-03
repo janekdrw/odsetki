@@ -15,11 +15,11 @@ class DateTest extends TestCase
     /**
      * @var string[]
      */
-    private $tValidValues;
+    private $tValidNextWorkingDay;
 
-    public function testValidTable(): void
+    public function testValidNextWorkingDay(): void
     {
-        foreach ($this->tValidValues as $key => $value) {
+        foreach ($this->tValidNextWorkingDay as $key => $value) {
             $origDate       = Date::parse($key);
             $nextWorkingDay = Date::parse($value);
             self::assertEquals($origDate->getNextWorkingDay()->getAsStr(), $nextWorkingDay->getAsStr());
@@ -30,7 +30,7 @@ class DateTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->tValidValues = [
+        $this->tValidNextWorkingDay = [
             '2019-12-30' => '2019-12-31',
             '2019-12-31' => '2020-01-02',
             '2020-01-01' => '2020-01-02',
@@ -49,6 +49,7 @@ class DateTest extends TestCase
             '2020-04-30' => '2020-05-04',
             '2020-12-23' => '2020-12-24',
             '2020-12-24' => '2020-12-28',
+            '2020-12-31' => '2021-01-04',
         ];
     }
 }
