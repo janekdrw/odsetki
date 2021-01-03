@@ -12,23 +12,35 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: PHP version
+      - name: 'PHP version'
+        with:
+          php-version: ${{ matrix.php-versions }}
         run: php -v
 
       - name: Validate composer.json and composer.lock
+        with:
+          php-version: ${{ matrix.php-versions }}
         run: composer validate
 
       - name: Install dependencies
+        with:
+          php-version: ${{ matrix.php-versions }}
         run: composer install --prefer-dist --no-progress --no-suggest
 
       # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
       # Docs: https://getcomposer.org/doc/articles/scripts.md
 
       - name: Run lint check
+        with:
+          php-version: ${{ matrix.php-versions }}
         run: composer lint
 
       - name: Run phpstan
+        with:
+          php-version: ${{ matrix.php-versions }}
         run: composer phpstan
 
       - name: Run test suite
+        with:
+          php-version: ${{ matrix.php-versions }}
         run: composer test
