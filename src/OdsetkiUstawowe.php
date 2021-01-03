@@ -10,7 +10,10 @@ namespace Mrcnpdlk\Lib\Odsetki;
 use Mrcnpdlk\Lib\Odsetki\Model\RangeModel;
 use Nette\Neon\Neon;
 
-class Odsetki
+/**
+ * Class Odsetki
+ */
+class OdsetkiUstawowe
 {
     /**
      * @var \Mrcnpdlk\Lib\Odsetki\Date
