@@ -18,23 +18,23 @@ class OdsetkiUstawowe
     /**
      * @var \Mrcnpdlk\Lib\Odsetki\Date
      */
-    private $deadlineDate;
+    private Date $deadlineDate;
     /**
      * @var \Mrcnpdlk\Lib\Odsetki\Date
      */
-    private $paymentDate;
+    private Date $paymentDate;
     /**
      * @var float
      */
-    private $charge;
+    private float $charge;
     /**
      * @var \Mrcnpdlk\Lib\Odsetki\Model\RangeModel[]
      */
-    private $ranges;
+    private array $ranges;
     /**
      * @var mixed[]
      */
-    private $tDesc = [];
+    private array $tDesc = [];
 
     /**
      * Odsetki constructor.
@@ -137,7 +137,7 @@ class OdsetkiUstawowe
                 }
             }
 
-            $delta = $range->percent * $diffDay * $this->charge / 365;
+            $delta = round($range->percent * $diffDay * $this->charge / 365, 2);
 
             $desc[]        = $diffDay;
             $desc[]        = $range->percent;

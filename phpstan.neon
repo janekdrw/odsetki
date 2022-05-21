@@ -5,7 +5,7 @@ parameters:
 		- tests
 	fileExtensions:
 		- php
-	excludes_analyse:
+	excludePaths:
 		- %currentWorkingDirectory%/tests/suits/OdsetkiTest.php
 	checkGenericClassInNonGenericObjectType: false
 
