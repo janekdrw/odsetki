@@ -18,7 +18,7 @@ class Date
     /**
      * @var \Carbon\Carbon
      */
-    private $carbon;
+    private Carbon|false $carbon;
 
     /**
      * Date constructor.

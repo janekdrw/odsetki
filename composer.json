@@ -17,18 +17,18 @@
   "minimum-stability": "stable",
   "prefer-stable": true,
   "require": {
-    "php": ">=7.2",
+    "php": ">=8.0",
     "ext-calendar": "*",
     "nesbot/carbon": "^2",
     "nette/neon": "^3"
   },
   "require-dev": {
-    "phpunit/phpunit": "^8",
-    "phpunit/php-code-coverage": "^7",
-    "friendsofphp/php-cs-fixer": "^2",
-    "phpstan/phpstan": "^0",
-    "phpstan/phpstan-phpunit": "^0",
-    "jangregor/phpstan-prophecy": "^0"
+    "phpunit/phpunit": "^9",
+    "phpunit/php-code-coverage": "^9",
+    "friendsofphp/php-cs-fixer": "^3",
+    "phpstan/phpstan": "^1",
+    "phpstan/phpstan-phpunit": "^1",
+    "jangregor/phpstan-prophecy": "^1"
   },
   "suggest": {
   },

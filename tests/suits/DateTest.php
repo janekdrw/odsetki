@@ -15,7 +15,7 @@ class DateTest extends TestCase
     /**
      * @var string[]
      */
-    private $tValidNextWorkingDay;
+    private array $tValidNextWorkingDay;
 
     public function testValidNextWorkingDay(): void
     {

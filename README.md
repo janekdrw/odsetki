@@ -1,7 +1,7 @@
 # Odsetki
-Kalkulator odsetek na podstawie https://kalkulatory.gofin.pl/
+Kalkulator odsetek na podstawie https://kalkulatory.gofin.pl/kalkulatory/kalkulator-odsetek-ustawowych
 
-Opis w języku polskim gdyż biblioteka ma zastosowanie jedynie z naszymi przepisami
+Opis w języku polskim, gdyż biblioteka ma zastosowanie jedynie z naszymi przepisami
 
 Przykład użycia:
 ```php

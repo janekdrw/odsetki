@@ -14,15 +14,15 @@ class RangeModel
     /**
      * @var \Mrcnpdlk\Lib\Odsetki\Date
      */
-    public $from;
+    public Date $from;
     /**
      * @var \Mrcnpdlk\Lib\Odsetki\Date|null
      */
-    public $to;
+    public ?Date $to;
     /**
      * @var float
      */
-    public $percent;
+    public float $percent;
 
     /**
      * RangeModel constructor.
