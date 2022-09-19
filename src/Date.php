@@ -73,7 +73,7 @@ class Date
     {
         return self::create($year, 3, 21)
                    ->addDays(easter_days($year))
-            ;
+        ;
     }
 
     /**
